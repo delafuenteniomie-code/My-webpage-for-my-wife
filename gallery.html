@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <title> Name and Section Form </title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f2f2f2;
+            }
+            
+            table {
+                margin: auto;
+                margin-top: 50px;
+                border-collapse: collapse;
+                background-color: white;
+                padding: 20px;
+                box-shadow: 0px 0px 10px gray;                
+            }
+            
+            td {
+                padding: 10px;
+            }
+            
+            input[type=text] {
+                width: 250px;
+                padding: 8px;
+            }
+            
+            button {
+                padding: 10px 20px;
+                font-size: 16px;
+                cursor: pointer;
+            }
+            
+            #result {
+                margin-top: 20px;
+                text-align: center;
+                font-size: 20px;
+                color: blue;
+            }
+
+        </style>
+        
+        <script>
+            function displayInfo() { 
+                
+                let name = document.getElementById("name").value;
+                let section = document.getElementById("section").value;
+                
+                document.getElementById("result").innerHTML = "<h2> Student Information </h2>" + "<p> <b> Name </b>" + name + "</p>" + "<p><b> Section: </b>" + section + "</p>";
+            }
+            
+        </script>
+        
+    </head>
+    
+    <body>
+        <table border="1">
+            <tr>
+                <th colspan="2"> Student Information Form </th>
+            </tr>
+            
+            <tr>
+                <td> Name </td>
+                <td> <input type="text" id="name"> </td>
+            </tr>
+            
+            <tr>
+                <td> Section </td>
+                <td> <input type="text" id="section"> </td>
+            </tr>
+            
+            <tr>
+                <td colspan="2" align="center"> 
+                    <button onclick="displayInfo()"> Submit </button>
+                </td>
+            </tr>
+        </table>
+        
+        <div id="result"></div>
+    </body>
+</html>

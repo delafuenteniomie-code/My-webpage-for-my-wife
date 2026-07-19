@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student System</title>
+    <style>
+        /* Rushed, basic student styling */
+        body {
+            background-color: #e5e5e5;
+            font-family: Arial;
+        }
+        .container {
+            background: white;
+            width: 400px;
+            margin: 10px auto;
+            padding: 10px;
+            border: 2px solid blue;
+        }
+        #resultBox {
+            background-color: yellow;
+            padding: 5px;
+            margin-top: 10px;
+            border: 1px solid black;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Santiago City National Senior High School</h2>
+        <h3>Student Information Evaluation System</h3>
+        <hr>
+
+        <form onsubmit="event.preventDefault(); checkData();">
+            <p>Name: <input type="text" id="name" required></p>
+            <p>Age: <input type="number" id="age" required></p>
+            <p>Grade Average: <input type="number" id="avg" step="0.01" required></p>
+            <p>Year Level: 
+                <select id="year" required>
+                    <option value="">--Select--</option>
+                    <option value="Grade 11">Grade 11</option>
+                    <option value="Grade 12">Grade 12</option>
+                </select>
+            </p>
+            <p>Strand: 
+                <select id="strand" required>
+                    <option value="">--Select--</option>
+                    <option value="STEM">STEM</option>
+                    <option value="ABM">ABM</option>
+                    <option value="HUMSS">HUMSS</option>
+                    <option value="TVL">TVL</option>
+                </select>
+            </p>
+            <button type="submit">Evaluate</button>
+        </form>
+
+        <div id="resultBox">
+            <p><b>Student Name:</b> <span id="outName"></span></p>
+            <p><b>Age:</b> <span id="outAge"></span></p>
+            <p><b>Grade Average:</b> <span id="outAvg"></span></p>
+            <p><b>Year Level:</b> <span id="outYear"></span></p>
+            <p><b>Strand:</b> <span id="outStrand"></span></p>
+            <p><b>Student Status:</b> <span id="outStatus"></span></p>
+            <p><b>Academic Honor:</b> <span id="outHonor"></span></p>
+            <p><b>Scholarship Result:</b> <span id="outScholar"></span></p>
+            <p><b>Laboratory Schedule:</b> <span id="outLab"></span></p>
+            <p><b>Student ID Eligibility:</b> <span id="outId"></span></p>
+        </div>
+    </div>
+
+    <script>
+        function checkData() {
+            // Get inputs straight into variables
+            let vName = document.getElementById("name").value;
+            let vAge = Number(document.getElementById("age").value);
+            let vAvg = Number(document.getElementById("avg").value);
+            let vYear = document.getElementById("year").value;
+            let vStrand = document.getElementById("strand").value;
+
+            let rId = "Not Eligible for Student ID";
+            let rStatus = "";
+            let rHonor = "";
+            let rScholar = "";
+            let rLab = "";
+
+            // 1. IF Statement
+            if (vAge >= 18) {
+                rId = "Eligible to Apply for Student ID";
+            }
+
+            // 2. IF...ELSE Statement
+            if (vAvg >= 75) {
+                rStatus = "Passed";
+            } else {
+                rStatus = "Failed";
+            }
+
+            // 3. ELSE IF Statement
+            if (vAvg >= 98 && vAvg <= 100) {
+                rHonor = "With Highest Honors";
+            } else if (vAvg >= 95 && vAvg <= 97) {
+                rHonor = "With High Honors";
+            } else if (vAvg >= 90 && vAvg <= 94) {
+                rHonor = "With Honors";
+            } else if (vAvg >= 75 && vAvg <= 89) {
+                rHonor = "Passed";
+            } else {
+                rHonor = "Failed";
+            }
+
+            // 4. NESTED IF Statement
+            if (vStrand == "STEM") {
+                if (vAvg >= 95) {
+                    rScholar = "Scholarship Granted";
+                } else {
+                    rScholar = "Scholarship Not Qualified";
+                }
+            } else {
+                rScholar = "Only STEM students are eligible.";
+            }
+
+            // 5. SWITCH Statement
+            switch (vStrand) {
+                case "STEM":
+                    rLab = "STEM - Monday";
+                    break;
+                case "ABM":
+                    rLab = "ABM - Tuesday";
+                    break;
+                case "HUMSS":
+                    rLab = "HUMSS - Wednesday";
+                    break;
+                case "TVL":
+                    rLab = "TVL - Thursday";
+                    break;
+                default:
+                    rLab = "Default - No Schedule Available";
+            }
+
+            // Throw everything onto the screen
+            document.getElementById("outName").innerHTML = vName;
+            document.getElementById("outAge").innerHTML = vAge;
+            document.getElementById("outAvg").innerHTML = vAvg;
+            document.getElementById("outYear").innerHTML = vYear;
+            document.getElementById("outStrand").innerHTML = vStrand;
+            document.getElementById("outStatus").innerHTML = rStatus;
+            document.getElementById("outHonor").innerHTML = rHonor;
+            document.getElementById("outScholar").innerHTML = rScholar;
+            document.getElementById("outLab").innerHTML = rLab;
+            document.getElementById("outId").innerHTML = rId;
+
+            // Show yellow box
+            document.getElementById("resultBox").style.display = "block";
+        }
+    </script>
+</body>
+</html>

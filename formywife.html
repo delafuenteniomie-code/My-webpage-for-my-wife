@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Favorite Person ❤️</title>
+    <style>
+        /* --- Reset & Base Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #fff5f6;
+            color: #4a4a4a;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- Header / Hero --- */
+        header {
+            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
+                        url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            border-bottom-left-radius: 50% 10%;
+            border-bottom-right-radius: 50% 10%;
+        }
+
+        header h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 20px;
+            font-style: italic;
+        }
+
+        /* --- Countdown Wrapper --- */
+        .timer-section {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(224, 150, 160, 0.2);
+            text-align: center;
+            margin: -60px auto 40px auto;
+            max-width: 600px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .timer-section h2 {
+            font-size: 18px;
+            color: #e056fd;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .time-box {
+            background: #fff5f6;
+            padding: 15px;
+            border-radius: 12px;
+            min-width: 80px;
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff4757;
+        }
+
+        .time-box label {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        /* --- Memory Grid --- */
+        .grid-section {
+            padding: 40px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #ff4757;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '❤️';
+            display: block;
+            font-size: 16px;
+            margin-top: 5px;
+        }
+
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .memory-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .memory-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .photo-placeholder {
+            background-color: #ffebee;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffb3c1;
+            font-size: 40px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-body h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #2f3542;
+        }
+
+        .card-body p {
+            font-size: 14px;
+            color: #747d8c;
+        }
+
+        /* --- Interactive Love Letter Generator --- */
+        .interactive-section {
+            background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+            color: white;
+            padding: 60px 20px;
+            border-radius: 24px;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .letter-box {
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            max-width: 600px;
+            margin: 25px auto;
+            padding: 30px;
+            border-radius: 16px;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-style: italic;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            font-size: 18px;
+        }
+
+        .action-btn {
+            background: white;
+            color: #ff758c;
+            border: none;
+            padding: 12px 28px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.05);
+            background: #fff5f6;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #a4b0be;
+            font-size: 14px;
+        }
+
+        /* --- Responsive Tweaks --- */
+        @media (max-width: 600px) {
+            header h1 { font-size: 32px; }
+            header p { font-size: 16px; }
+            .countdown { gap: 10px; }
+            .time-box { min-width: 65px; padding: 10px; }
+            .time-box span { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO SECTION -->
+    <header>
+        <div>
+            <h1>To My Beautiful Girlfriend</h1>
+            <p>Every single day with you is my new favorite day.</p>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <!-- TIME TOGETHER COUNTER -->
+        <!-- Note: You can customize the date string in the script below to match your anniversary -->
+        <section class="timer-section">
+            <h2>Time Spent Loving You</h2>
+            <div class="countdown">
+                <div class="time-box">
+                    <span id="days">00</span>
+                    <label>Days</label>
+                </div>
+                <div class="time-box">
+                    <span id="hours">00</span>
+                    <label>Hours</label>
+                </div>
+                <div class="time-box">
+                    <span id="minutes">00</span>
+                    <label>Mins</label>
+                </div>
+                <div class="time-box">
+                    <span id="seconds">00</span>
+                    <label>Secs</label>
+                </div>
+            </div>
+        </section>
+
+        <!-- MEMORY GRID SECTION -->
+        <section class="grid-section">
+            <h2 class="section-title">Our Favorite Moments Together</h2>
+            <div class="memory-grid">
+                
+                <!-- Card 1 -->
+                <div class="memory-card">
+                    <div class="photo-placeholder">🗺️</div>
+                    <div class="card-body">
+                        <h3>Our First Date</h3>
+                        <p>Where it all started. I was incredibly nervous, but the moment you smiled, all my fears completely vanished.</p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="memory-card">
+                    <div class="photo-placeholder">🍕</div>
+                    <div class="card-body">
+                        <h3>Late Night Adventures</h3>
+                        <p>Hunting down the best local spot at midnight. Unplanned road trips and endless laughter are the absolute best with you.</p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="memory-card">
+                    <div class="photo-placeholder">🌅</div>
+                    <div class="card-body">
+                        <h3>The Perfect Sunset</h3>
+                        <p>Sitting side by side watching the sky turn orange. Honestly, I spent more time looking at you than the view itself.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- INTERACTIVE LOVE NOTE GENERATOR -->
+        <section class="interactive-section">
+            <h2>Need a little reminder?</h2>
+            <p>Click the button below to generate a reason why I love you.</p>
+            <div class="letter-box" id="loveNote">
+                "Click the heart button below to read a note..."
+            </div>
+            <button class="action-btn" onclick="generateNote()">Generate Reason 💖</button>
+        </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>Built intentionally for you. Today, Tomorrow, and Always.</p>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT CONFIGURATIONS -->
+    <script>
+        // --- 1. ANNIVERSARY TIMER LOGIC ---
+        // INSTRUCTION: Replace this date string with your relationship anniversary date!
+        const anniversaryDate = new Date("October 14, 2024 00:00:00").getTime();
+
+        function updateTimer() {
+            const now = new Date().getTime();
+            // Calculate distance since the anniversary passed
+            const distance = now - anniversaryDate;
+
+            // Math conversions for days, hours, minutes, seconds
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Output data properties to specific elements
+            document.getElementById("days").innerText = days;
+            document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+            document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+            document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // --- 2. RANDOM LOVE NOTE REASONS ARRAYS ---
+        const reasons = [
+            "I love the sound of your laugh—it's easily my absolute favorite sound in the entire world.",
+            "The way you fiercely care for the people in your life inspires me to be a better person daily.",
+            "You possess an incredible superpower of turning even my roughest days completely around.",
+            "I love how comfortable and instantly at home I feel the second you wrap your arms around me.",
+            "Your brilliant mind and unique perspective never fail to fascinate me.",
+            "I love all of your quirks—you are entirely, wonderfully, undeniably perfect to me."
+        ];
+
+        function generateNote() {
+            const noteElement = document.getElementById("loveNote");
+            const randomIndex = Math.floor(Math.random() * reasons.length);
+            
+            // Add a simple fade animation change
+            noteElement.style.opacity = 0;
+            setTimeout(() => {
+                noteElement.innerText = `"${reasons[randomIndex]}"`;
+                noteElement.style.opacity = 1;
+            }, 200);
+        }
+    </script>
+</body>
+</html>

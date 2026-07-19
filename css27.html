@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My ICT Performance Task</title>
+    <style>
+        /* Simple student style with basic colors */
+        body {
+            background-color: lightgray;
+            font-family: Arial;
+        }
+        
+        .main-container {
+            background-color: white;
+            width: 450px;
+            margin: 20px auto;
+            padding: 15px;
+            border: 3px solid blue;
+        }
+        
+        h2, h3 {
+            text-align: center;
+            color: blue;
+        }
+        
+        .form-field {
+            margin: 10px 0;
+        }
+        
+        label {
+            display: inline-block;
+            width: 140px;
+            font-weight: bold;
+        }
+        
+        input, select {
+            width: 250px;
+        }
+        
+        button {
+            width: 100%;
+            background-color: blue;
+            color: white;
+            font-weight: bold;
+            padding: 8px;
+            border: none;
+            cursor: pointer;
+        }
+        
+        /* Simple yellow output block */
+        #displayBox {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: yellow;
+            border: 2px dashed black;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <h2>Santiago City National Senior High School</h2>
+        <h3>Student Information Evaluation System</h3>
+        <hr>
+
+        <form id="studentForm">
+            <div class="form-field">
+                <label>Student Name:</label>
+                <input type="text" id="name" required>
+            </div>
+            
+            <div class="form-field">
+                <label>Age:</label>
+                <input type="number" id="age" required>
+            </div>
+
+            <div class="form-field">
+                <label>Grade Average:</label>
+                <input type="number" id="average" step="0.01" required>
+            </div>
+
+            <div class="form-field">
+                <label>Year Level:</label>
+                <select id="year" required>
+                    <option value="">--Select--</option>
+                    <option value="Grade 11">Grade 11</option>
+                    <option value="Grade 12">Grade 12</option>
+                </select>
+            </div>
+
+            <div class="form-field">
+                <label>Strand:</label>
+                <select id="strand" required>
+                    <option value="">--Select--</option>
+                    <option value="STEM">STEM</option>
+                    <option value="ABM">ABM</option>
+                    <option value="HUMSS">HUMSS</option>
+                    <option value="TVL">TVL</option>
+                </select>
+            </div>
+
+            <button type="submit">Evaluate</button>
+        </form>
+
+        <div id="displayBox">
+            <p><b>Student Name:</b> <span id="outName"></span></p>
+            <p><b>Age:</b> <span id="outAge"></span></p>
+            <p><b>Grade Average:</b> <span id="outAverage"></span></p>
+            <p><b>Year Level:</b> <span id="outYear"></span></p>
+            <p><b>Strand:</b> <span id="outStrand"></span></p>
+            <p><b>Student Status:</b> <span id="outStatus"></span></p>
+            <p><b>Academic Honor:</b> <span id="outHonor"></span></p>
+            <p><b>Scholarship Result:</b> <span id="outScholar"></span></p>
+            <p><b>Laboratory Schedule:</b> <span id="outLab"></span></p>
+            <p><b>Student ID Eligibility:</b> <span id="outId"></span></p>
+        </div>
+    </div>
+
+    <script>
+        // window.onload guarantees the browser loads the inputs first, fixing the error!
+        window.onload = function() {
+            
+            document.getElementById("studentForm").onsubmit = function(event) {
+                event.preventDefault(); // Stop page reload
+
+                // Fetch values
+                let txtName = document.getElementById("name").value;
+                let numAge = Number(document.getElementById("age").value);
+                let numAvg = Number(document.getElementById("average").value);
+                let txtYear = document.getElementById("year").value;
+                let txtStrand = document.getElementById("strand").value;
+
+                // Output strings placeholders
+                let textId = "Not Eligible for Student ID";
+                let textStatus = "";
+                let textHonor = "";
+                let textScholar = "";
+                let textLab = "";
+
+                // 1. IF Statement
+                if (numAge >= 18) {
+                    textId = "Eligible to Apply for Student ID";
+                }
+
+                // 2. IF...ELSE Statement
+                if (numAvg >= 75) {
+                    textStatus = "Passed";
+                } else {
+                    textStatus = "Failed";
+                }
+
+                // 3. ELSE IF Statement
+                if (numAvg >= 98 && numAvg <= 100) {
+                    textHonor = "With Highest Honors";
+                } else if (numAvg >= 95 && numAvg <= 97) {
+                    textHonor = "With High Honors";
+                } else if (numAvg >= 90 && numAvg <= 94) {
+                    textHonor = "With Honors";
+                } else if (numAvg >= 75 && numAvg <= 89) {
+                    textHonor = "Passed";
+                } else {
+                    textHonor = "Failed";
+                }
+
+                // 4. NESTED IF Statement
+                if (txtStrand == "STEM") {
+                    if (numAvg >= 95) {
+                        textScholar = "Scholarship Granted";
+                    } else {
+                        textScholar = "Scholarship Not Qualified";
+                    }
+                } else {
+                    textScholar = "Only STEM students are eligible.";
+                }
+
+                // 5. SWITCH Statement
+                switch (txtStrand) {
+                    case "STEM":
+                        textLab = "STEM - Monday";
+                        break;
+                    case "ABM":
+                        textLab = "ABM - Tuesday";
+                        break;
+                    case "HUMSS":
+                        textLab = "HUMSS - Wednesday";
+                        break;
+                    case "TVL":
+                        textLab = "TVL - Thursday";
+                        break;
+                    default:
+                        textLab = "Default - No Schedule Available";
+                }
+
+                // Print outputs into the matching HTML fields
+                document.getElementById("outName").innerHTML = txtName;
+                document.getElementById("outAge").innerHTML = numAge;
+                document.getElementById("outAverage").innerHTML = numAvg;
+                document.getElementById("outYear").innerHTML = txtYear;
+                document.getElementById("outStrand").innerHTML = txtStrand;
+                document.getElementById("outStatus").innerHTML = textStatus;
+                document.getElementById("outHonor").innerHTML = textHonor;
+                document.getElementById("outScholar").innerHTML = textScholar;
+                document.getElementById("outLab").innerHTML = textLab;
+                document.getElementById("outId").innerHTML = textId;
+
+                // Show results block
+                document.getElementById("displayBox").style.display = "block";
+            };
+            
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home | Personal Info</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background-color: #0B1116;
+      color: white;
+      font-family: Verdana, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* 1. NAV */
+    nav {
+      background-color: #0B1116;
+      padding: 15px 0;
+      text-align: center;
+    }
+    nav a {
+      display: inline-block;
+      margin: 0 15px;
+      padding: 8px 20px;
+      background-color: #000;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+    nav a:hover { background-color: #333; transform: translateY(-2px); }
+
+    /* 2. WELCOME ANIMATION - FADE + SLIDE UP */
+    .hero {
+      height: 70vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7));
+    }
+    .hero h1 {
+      font-size: 24px;
+      line-height: 1.5;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeSlideUp 1.5s ease-out forwards;
+      animation-delay: 0.5s;
+    }
+
+    @keyframes fadeSlideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* 3. GALLERY TITLE */
+    .section-title {
+      text-align: center;
+      padding: 30px 0;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    /* 4. HORIZONTAL SCROLLING GALLERY WITH ANIMATION */
+    .gallery {
+      display: flex;
+      gap: 10px;
+      padding: 0 10px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .gallery img {
+      width: 250px;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 8px;
+      scroll-snap-align: start;
+      filter: brightness(0.7);
+      transform: scale(0.9);
+      opacity: 0;
+      animation: popIn 0.8s ease-out forwards;
+    }
+    .gallery img:nth-child(1) { animation-delay: 0.2s; }
+    .gallery img:nth-child(2) { animation-delay: 0.4s; }
+    .gallery img:nth-child(3) { animation-delay: 0.6s; }
+    .gallery img:nth-child(4) { animation-delay: 0.8s; }
+
+    @keyframes popIn {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .gallery img:hover {
+      filter: brightness(1);
+      transform: scale(1.05);
+      transition: 0.3s;
+    }
+
+    /* Hide scrollbar */
+    .gallery::-webkit-scrollbar { display: none; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#home">HOME</a>
+    <a href="#about">ABOUT</a>
+    <a href="#gallery">GALLERY</a>
+    <a href="#contact">CONTACT</a>
+  </nav>
+
+  <!-- WELCOME SECTION WITH ANIMATION -->
+  <section class="hero" id="home">
+    <h1>
+      WELCOME TO<br>
+      SANTIAGO CITY HIGH NATIONAL HIGH SCHOOL
+    </h1>
+  </section>
+
+  <!-- GALLERY WITH ANIMATION -->
+  <div class="section-title" id="gallery">GALLERY</div>
+  <div class="gallery">
+    <img src="car1.jpg" alt="Car 1">
+    <img src="car2.jpg" alt="Car 2">
+    <img src="car3.jpg" alt="Car 3">
+    <img src="car4.jpg" alt="Car 4">
+  </div>
+
+</body>
+</html>

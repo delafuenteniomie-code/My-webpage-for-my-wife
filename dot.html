@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>The Smith Family Website</title>
+    <style>
+        /* --- Base Reset & Typography --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f7f9fa;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Header Styles (Extended Container) --- */
+        header {
+            background-color: #2c3e50;
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        .logo {
+            text-align: center;
+            padding: 1.5rem 1rem 1rem 1rem;
+        }
+        .logo h1 {
+            font-size: 1.8rem;
+            color: #ecf0f1;
+        }
+
+        /* --- Navigation Bar Row --- */
+        nav {
+            background-color: #34495e; 
+            border-top: 1px solid #4f5d73;
+            border-bottom: 1px solid #1a252f;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        nav ul li {
+            position: relative; 
+        }
+        nav ul li a, .dropbtn {
+            display: inline-block;
+            color: #ecf0f1;
+            text-decoration: none;
+            padding: 0.85rem 1.5rem;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        nav ul li a:hover, .dropdown:hover .dropbtn {
+            background-color: #2c3e50;
+        }
+
+        /* --- Dropdown Menu --- */
+        .dropdown-content {
+            display: none; 
+            position: absolute;
+            background-color: #ffffff;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.15);
+            z-index: 150; /* Higher z-index to fly over the header table */
+            top: 100%; 
+            left: 0;
+            border-radius: 0 0 4px 4px;
+            overflow: hidden;
+        }
+        .dropdown-content a {
+            color: #333;
+            padding: 0.75rem 1rem;
+            display: block;
+            text-align: left;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+            color: #2c3e50;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* --- Table Row Inside Header --- */
+        .header-table-container {
+            background-color: #243342; /* Darker variant for contrast */
+            padding: 1.25rem 2rem;
+        }
+        .table-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow-x: auto; /* Handles thin screens gracefully */
+            border-radius: 6px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+        th, td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #2c3e50;
+        }
+        th {
+            background-color: #1a252f;
+            color: #3498db;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+        td {
+            color: #ecf0f1;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        tr:hover td {
+            background-color: #2c3e50;
+        }
+        
+        /* --- Badges for Dark Header Theme --- */
+        .status-badge {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .badge-confirmed { background-color: #2ecc71; color: #fff; }
+        .badge-pending { background-color: #f1c40f; color: #2c3e50; }
+
+        /* --- Main Content Area --- */
+        main {
+            flex: 1; 
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            width: 100%;
+        }
+        .hero {
+            background-color: #e8f4f8;
+            padding: 3rem 2rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 2rem;
+            border-left: 5px solid #3498db;
+        }
+        .hero h2 {
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .card {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card h3 {
+            color: #3498db;
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- Footer Styles --- */
+        footer {
+            background-color: #2c3e50;
+            color: #bdc3c7;
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+        footer .footer-links a {
+            color: #3498db;
+            text-decoration: none;
+            margin: 0 0.5rem;
+        }
+        footer .footer-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SITE HEADER -->
+    <header>
+        <!-- Tier 1: Logo -->
+        <div class="logo">
+            <h1>🏡 The Smith Family</h1>
+        </div>
+        
+        <!-- Tier 2: Navigation Bar -->
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">Our Story</a></li>
+                <li class="dropdown">
+                    <button class="dropbtn">Photo Albums ▼</button>
+                    <div class="dropdown-content">
+                        <a href="#summer2025">Summer Vacation</a>
+                        <a href="#holidays">Holidays</a>
+                        <a href="#birthdays">Birthdays</a>
+                    </div>
+                </li>
+                <li><a href="#blog">Family Blog</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- Tier 3: Table Down Inside Header -->
+        <div class="header-table-container">
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>📅 Event Schedule</th>
+                            <th>Date</th>
+                            <th>Location</th>
+                            <th>Organizer</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Uncle Bob's Birthday Dinner</td>
+                            <td>August 14, 2026</td>
+                            <td>Olive Garden</td>
+                            <td>Aunt Clara</td>
+                            <td><span class="status-badge badge-confirmed">Confirmed</span></td>
+                        </tr>
+                        <tr>
+                            <td>Labor Day Backyard BBQ</td>
+                            <td>September 7, 2026</td>
+                            <td>Mom & Dad's House</td>
+                            <td>David Smith</td>
+                            <td><span class="status-badge badge-confirmed">Confirmed</span></td>
+                        </tr>
+                        <tr>
+                            <td>Thanksgiving Planning Call</td>
+                            <td>October 15, 2026</td>
+                            <td>Zoom Meeting</td>
+                            <td>Sarah Jenkins</td>
+                            <td><span class="status-badge badge-pending">Pending</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main id="home">
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <h2>Welcome to Our Virtual Home!</h2>
+            <p>This is a private space dedicated to keeping our extended family updated with news, photos, and upcoming events.</p>
+        </section>
+
+        <!-- CARD GRID -->
+        <section class="content-grid">
+            <div class="card">
+                <h3>Latest Update</h3>
+                <p>Mom and Dad just celebrated their 30th anniversary! Check the photo albums to see the pictures from dinner.</p>
+            </div>
+            <div class="card">
+                <h3>Next Reunion</h3>
+                <p>Mark your calendars! The 2027 Family Reunion is scheduled for July 10-12 at Lake Tahoe.</p>
+            </div>
+            <div class="card">
+                <h3>Birthdays this Month</h3>
+                <p>Don't forget to call Uncle Bob on the 14th and Sarah on the 22nd!</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- SITE FOOTER -->
+    <footer>
+        <p>&copy; 2026 Smith Family Website. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#privacy">Privacy Policy</a> | 
+            <a href="#terms">Family Rules</a>
+        </div>
+    </footer>
+
+</body>
+</html>

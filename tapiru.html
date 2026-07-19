@@ -1,0 +1,95 @@
+<html>
+<head>
+<style>
+/* Yung buong Nav Bar */
+.navbar {
+  background: #667eea;
+  overflow: hidden;
+  font-family: Arial;
+}
+
+/* Yung mga link sa nav */
+.navbar a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+/* Yung container ng dropdown */
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+/* Yung button ng dropdown */
+.dropbtn {
+  background: #667eea;
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Hover effect */
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background: #764ba2;
+}
+
+/* Yung content na lalabas - naka-hide muna */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background: white;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Yung links sa loob ng dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  float: none;
+}
+
+/* Hover sa loob ng dropdown */
+.dropdown-content a:hover {
+  background: #ddd;
+}
+
+/* Ipapakita pag ni-hover yung dropdown */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+</style>
+</head>
+<body>
+
+<div class="navbar">
+  <a href="#">Home</a>
+  <a href="#">About</a>
+  
+  <!-- ETO YUNG MAY DROPDOWN -->
+  <div class="dropdown">
+    <button class="dropbtn">Strands ▼</button>
+    <div class="dropdown-content">
+      <a href="#">STEM</a>
+      <a href="#">ASH</a>
+      <a href="#">ICT</a>
+      <a href="#">TH</a>
+    </div>
+  </div>
+
+  <a href="#">Contact</a>
+</div>
+
+<h2>Welcome to Student Site</h2>
+
+</body>
+</html>
