@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello Kitty Apple Catcher</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        body {
+            background-color: #ffe6f2;
+            background-image: radial-gradient(#ffb3d9 15%, transparent 16%);
+            background-size: 24px 24px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        #game-container {
+            position: relative;
+            width: 480px;
+            height: 600px;
+            box-shadow: 0 12px 30px rgba(255, 105, 180, 0.3);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 6px solid #ff99cc;
+            background: linear-gradient(to bottom, #e6f7ff 0%, #fff0f5 100%);
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 240, 245, 0.88);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #ff3385;
+            font-size: 32px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 0px #fff;
+        }
+
+        p {
+            color: #666;
+            font-size: 15px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .btn {
+            background-color: #ff66a3;
+            color: white;
+            border: none;
+            padding: 12px 32px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(255, 102, 163, 0.4);
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #ff3385;
+            transform: scale(1.05);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .legend {
+            background: white;
+            border-radius: 16px;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            border: 2px dashed #ffb3d9;
+            text-align: left;
+            font-size: 13px;
+            color: #444;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 4px 0;
+        }
+
+        .legend-icon {
+            width: 20px;
+            text-align: center;
+            margin-right: 8px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="game-container">
+    <canvas id="gameCanvas" width="480" height="600"></canvas>
+
+    <!-- Start Screen -->
+    <div id="startScreen" class="overlay">
+        <h1>Hello Kitty<br>Apple Catcher</h1>
+        <p>Catch as many treats as you can!</p>
+        
+        <div class="legend">
+            <div class="legend-item"><span class="legend-icon">🍎</span> Standard Apple: +10 pts</div>
+            <div class="legend-item"><span class="legend-icon">🌟</span> Golden Apple: +50 pts</div>
+            <div class="legend-item"><span class="legend-icon">💖</span> Extra Heart: +1 Life</div>
+            <div class="legend-item"><span class="legend-icon">💣</span> Bomb: -1 Life</div>
+        </div>
+
+        <button class="btn" onclick="startGame()">Play Game</button>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameOverScreen" class="overlay hidden">
+        <h1>Game Over!</h1>
+        <p id="finalScoreText">Your Score: 0</p>
+        <p id="highScoreText" style="margin-top: -10px; font-weight: bold; color: #ff3385;">High Score: 0</p>
+        <button class="btn" onclick="startGame()">Play Again</button>
+    </div>
+</div>
+
+<script>
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+
+// Screens
+const startScreen = document.getElementById('startScreen');
+const gameOverScreen = document.getElementById('gameOverScreen');
+const finalScoreText = document.getElementById('finalScoreText');
+const highScoreText = document.getElementById('highScoreText');
+
+// Game State Variables
+let gameState = 'START';
+let score = 0;
+let highScore = localStorage.getItem('hk_highScore') || 0;
+let lives = 3;
+const maxLives = 5;
+let items = [];
+let floatingTexts = [];
+let spawnTimer = 0;
+let spawnInterval = 60; // frames between spawns
+
+// Player (Hello Kitty)
+const player = {
+    x: canvas.width / 2,
+    y: canvas.height - 70,
+    width: 70,
+    height: 60,
+    speed: 7
+};
+
+// Input Handling
+const keys = {};
+window.addEventListener('keydown', e => keys[e.code] = true);
+window.addEventListener('keyup', e => keys[e.code] = false);
+
+// Touch / Mouse Control
+let isDragging = false;
+canvas.addEventListener('mousedown', e => { isDragging = true; updatePlayerPos(e); });
+canvas.addEventListener('mousemove', e => { if (isDragging) updatePlayerPos(e); });
+window.addEventListener('mouseup', () => isDragging = false);
+
+canvas.addEventListener('touchstart', e => { isDragging = true; updatePlayerPos(e.touches[0]); }, {passive: true});
+canvas.addEventListener('touchmove', e => { if (isDragging) updatePlayerPos(e.touches[0]); }, {passive: true});
+window.addEventListener('touchend', () => isDragging = false);
+
+function updatePlayerPos(e) {
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+    if (clientX) {
+        player.x = (clientX - rect.left) * scaleX;
+    }
+}
+
+function startGame() {
+    score = 0;
+    lives = 3;
+    items = [];
+    floatingTexts = [];
+    spawnInterval = 60;
+    gameState = 'PLAYING';
+
+    startScreen.classList.add('hidden');
+    gameOverScreen.classList.add('hidden');
+    
+    requestAnimationFrame(gameLoop);
+}
+
+function spawnItem() {
+    const x = Math.random() * (canvas.width - 40) + 20;
+    const rand = Math.random();
+    let type = 'apple';
+    
+    if (rand < 0.15) {
+        type = 'gold'; // 15%
+    } else if (rand < 0.25) {
+        type = 'heart'; // 10%
+    } else if (rand < 0.45) {
+        type = 'bomb'; // 20%
+    }
+
+    const speed = 2.5 + Math.random() * 1.5 + (score / 200); // gets faster as score rises
+
+    items.push({ x, y: -20, type, speed, radius: 18 });
+}
+
+function addFloatingText(text, x, y, color) {
+    floatingTexts.push({ text, x, y, color, opacity: 1.0, life: 40 });
+}
+
+// Drawing Functions
+function drawHelloKitty(x, y) {
+    ctx.save();
+    ctx.translate(x, y);
+
+    // Ears
+    ctx.fillStyle = '#ffffff';
+    ctx.strokeStyle = '#333333';
+    ctx.lineWidth = 3;
+
+    // Left Ear
+    ctx.beginPath();
+    ctx.ellipse(-22, -22, 10, 14, -Math.PI / 6, 0, Math.PI * 2);
+    ctx.fill(); ctx.stroke();
+
+    // Right Ear
+    ctx.beginPath();
+    ctx.ellipse(22, -22, 10, 14, Math.PI / 6, 0, Math.PI * 2);
+    ctx.fill(); ctx.stroke();
+
+    // Head
+    ctx.beginPath();
+    ctx.ellipse(0, 0, 32, 24, 0, 0, Math.PI * 2);
+    ctx.fill(); ctx.stroke();
+
+    // Eyes
+    ctx.fillStyle = '#333333';
+    ctx.beginPath(); ctx.ellipse(-14, -2, 3, 5, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(14, -2, 3, 5, 0, 0, Math.PI * 2); ctx.fill();
+
+    // Nose
+    ctx.fillStyle = '#ffcc00';
+    ctx.beginPath(); ctx.ellipse(0, 5, 4, 3, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.stroke();
+
+    // Whiskers (Left)
+    ctx.beginPath();
+    ctx.moveTo(-24, -2); ctx.lineTo(-38, -5);
+    ctx.moveTo(-26, 4);  ctx.lineTo(-40, 4);
+    ctx.moveTo(-24, 10); ctx.lineTo(-38, 13);
+    // Whiskers (Right)
+    ctx.moveTo(24, -2);  ctx.lineTo(38, -5);
+    ctx.moveTo(26, 4);   ctx.lineTo(40, 4);
+    ctx.moveTo(24, 10);  ctx.lineTo(38, 13);
+    ctx.stroke();
+
+    // Pink Bow (Right Ear)
+    ctx.fillStyle = '#ff3385';
+    // Center knot
+    ctx.beginPath(); ctx.arc(18, -20, 6, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+    // Left loop
+    ctx.beginPath(); ctx.ellipse(10, -20, 8, 6, -Math.PI/12, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+    // Right loop
+    ctx.beginPath(); ctx.ellipse(26, -20, 8, 6, Math.PI/12, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+
+    ctx.restore();
+}
+
+function drawItem(item) {
+    ctx.save();
+    ctx.translate(item.x, item.y);
+
+    if (item.type === 'apple') {
+        // Red Apple
+        ctx.fillStyle = '#ff3333';
+        ctx.beginPath(); ctx.arc(0, 0, 16, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = '#663300'; // Stem
+        ctx.fillRect(-2, -22, 4, 8);
+        ctx.fillStyle = '#33cc33'; // Leaf
+        ctx.beginPath(); ctx.ellipse(4, -20, 6, 3, Math.PI / 4, 0, Math.PI * 2); ctx.fill();
+    } else if (item.type === 'gold') {
+        // Glowing Gold Apple
+        ctx.shadowColor = '#ffe600';
+        ctx.shadowBlur = 12;
+        ctx.fillStyle = '#ffd700';
+        ctx.beginPath(); ctx.arc(0, 0, 16, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = '#663300';
+        ctx.fillRect(-2, -22, 4, 8);
+        ctx.fillStyle = '#33cc33';
+        ctx.beginPath(); ctx.ellipse(4, -20, 6, 3, Math.PI / 4, 0, Math.PI * 2); ctx.fill();
+    } else if (item.type === 'heart') {
+        // Extra Life Heart
+        ctx.fillStyle = '#ff66b2';
+        ctx.font = '24px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('💖', 0, 0);
+    } else if (item.type === 'bomb') {
+        // Bomb
+        ctx.fillStyle = '#555';
+        ctx.beginPath(); ctx.arc(0, 2, 15, 0, Math.PI * 2); ctx.fill();
+        ctx.strokeStyle = '#ffa500'; // Spark
+        ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(0, -13); ctx.lineTo(6, -20); ctx.stroke();
+    }
+
+    ctx.restore();
+}
+
+function drawHUD() {
+    // Score
+    ctx.fillStyle = '#ff3385';
+    ctx.font = 'bold 20px sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText(`Score: ${score}`, 20, 35);
+
+    // Hearts (Lives)
+    let heartStr = '';
+    for (let i = 0; i < lives; i++) heartStr += '❤️ ';
+    ctx.textAlign = 'right';
+    ctx.fillText(heartStr, canvas.width - 20, 35);
+}
+
+function update() {
+    // Movement
+    if (keys['ArrowLeft'] || keys['KeyA']) player.x -= player.speed;
+    if (keys['ArrowRight'] || keys['KeyD']) player.x += player.speed;
+
+    // Boundaries
+    player.x = Math.max(35, Math.min(canvas.width - 35, player.x));
+
+    // Spawning items
+    spawnTimer++;
+    if (spawnTimer >= spawnInterval) {
+        spawnItem();
+        spawnTimer = 0;
+        if (spawnInterval > 30) spawnInterval -= 0.2; // gradually speed up spawning
+    }
+
+    // Update Items
+    for (let i = items.length - 1; i >= 0; i--) {
+        const item = items[i];
+        item.y += item.speed;
+
+        // Collision Check
+        const dx = item.x - player.x;
+        const dy = item.y - player.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < item.radius + 30) {
+            // Caught item
+            if (item.type === 'apple') {
+                score += 10;
+                addFloatingText('+10', item.x, item.y, '#ff3385');
+            } else if (item.type === 'gold') {
+                score += 50;
+                addFloatingText('+50!', item.x, item.y, '#e6b800');
+            } else if (item.type === 'heart') {
+                if (lives < maxLives) lives++;
+                addFloatingText('+1 Life!', item.x, item.y, '#ff66b2');
+            } else if (item.type === 'bomb') {
+                lives--;
+                addFloatingText('-1 Life', item.x, item.y, '#cc0000');
+                if (lives <= 0) {
+                    endGame();
+                }
+            }
+            items.splice(i, 1);
+            continue;
+        }
+
+        // Off screen
+        if (item.y > canvas.height + 30) {
+            items.splice(i, 1);
+        }
+    }
+
+    // Update Floating Text
+    for (let i = floatingTexts.length - 1; i >= 0; i--) {
+        const ft = floatingTexts[i];
+        ft.y -= 1;
+        ft.life--;
+        ft.opacity = ft.life / 40;
+        if (ft.life <= 0) floatingTexts.splice(i, 1);
+    }
+}
+
+function endGame() {
+    gameState = 'GAMEOVER';
+    if (score > highScore) {
+        highScore = score;
+        localStorage.setItem('hk_highScore', highScore);
+    }
+    finalScoreText.textContent = `Your Score: ${score}`;
+    highScoreText.textContent = `High Score: ${highScore}`;
+    gameOverScreen.classList.remove('hidden');
+}
+
+function gameLoop() {
+    if (gameState !== 'PLAYING') return;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    update();
+
+    // Render items
+    items.forEach(drawItem);
+
+    // Render player
+    drawHelloKitty(player.x, player.y);
+
+    // Render floating text
+    floatingTexts.forEach(ft => {
+        ctx.save();
+        ctx.globalAlpha = ft.opacity;
+        ctx.fillStyle = ft.color;
+        ctx.font = 'bold 18px sans-serif';
+        ctx.fillText(ft.text, ft.x, ft.y);
+        ctx.restore();
+    });
+
+    // Render HUD
+    drawHUD();
+
+    requestAnimationFrame(gameLoop);
+}
+</script>
+</body>
+</html>
