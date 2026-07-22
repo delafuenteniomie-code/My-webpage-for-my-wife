@@ -1,53 +1,272 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<style>
-  body {
-    text-align: center;
-    padding: 50px;
-    background: #f0f0f0;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile Webpage</title>
+  
+  <style>
+    /* Reset & general stuff */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  .btn {
-    padding: 12px 25px;
-    margin: 10px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #f4f5f6;
+      color: #2c3e50;
+      padding-bottom: 60px;
+    }
 
-  .btn-green {
-    background: #4CAF50;
-    color: white;
-  }
-  .btn-green:hover {
-    background: #45a049;
-  }
+    .wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
 
-  .btn-red {
-    background: #f44336;
-    color: white;
-  }
-  .btn-red:hover {
-    background: #d32f2f;
-  }
+    /* Header styling */
+    header {
+      padding: 60px 0 30px 0;
+      text-align: left;
+      border-bottom: 2px solid #e2e8f0;
+      margin-bottom: 30px;
+    }
 
-  .btn-blue {
-    background: #2196F3;
-    color: white;
-  }
-  .btn-blue:hover {
-    background: #1976D2;
-  }
-</style>
+    header h1 {
+      font-size: 2.8rem;
+      color: #1a202c;
+      font-weight: 800;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      color: #718096;
+      margin-top: 5px;
+    }
+
+    /* Navbar styling */
+    nav {
+      background: #ffffff;
+      padding: 12px 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+      margin-bottom: 40px;
+      position: sticky;
+      top: 15px;
+      z-index: 99;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 15px;
+      align-items: center;
+    }
+
+    nav a, nav button {
+      text-decoration: none;
+      color: #4a5568;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 8px 12px;
+      border-radius: 5px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    nav a:hover, nav button:hover {
+      background: #edf2f7;
+      color: #2b6cb0; /* Nice blue accent */
+    }
+
+    /* Dropdown menu functionality */
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      background: #fff;
+      min-width: 150px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      margin-top: 5px;
+      padding: 5px 0;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 8px 15px;
+      font-weight: 500;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    /* Layout structure */
+    section {
+      background: #ffffff;
+      padding: 30px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    section h2 {
+      font-size: 1.5rem;
+      color: #1a202c;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #edf2f7;
+      padding-bottom: 8px;
+    }
+
+    /* Card styling */
+    .flex-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 15px;
+    }
+
+    .item-card {
+      flex: 1 1 calc(33.333% - 20px);
+      min-width: 230px;
+      background: #f7fafc;
+      padding: 20px;
+      border-radius: 6px;
+      border-left: 4px solid #2b6cb0; /* Matching blue accent line */
+    }
+
+    .item-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      color: #2d3748;
+    }
+
+    .item-card p {
+      font-size: 0.9rem;
+      color: #4a5568;
+      line-height: 1.5;
+    }
+
+    footer {
+      text-align: center;
+      color: #a0aec0;
+      font-size: 0.85rem;
+      margin-top: 50px;
+    }
+  </style>
 </head>
 <body>
 
-  <button class="btn btn-green">Save</button>
-  <button class="btn btn-red">Delete</button>
-  <button class="btn btn-blue">Submit</button>
+  <div class="wrapper">
+
+    <header>
+      <h1>Hey, I'm Chris 👋</h1>
+      <p>Welcome to my digital scratchpad. Just a place to keep track of stuff I like.</p>
+    </header>
+
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li class="dropdown">
+          <button>Interests ▾</button>
+          <div class="dropdown-menu">
+            <a href="#hobbies">Hobbies</a>
+            <a href="#food">Food I Like</a>
+          </div>
+        </li>
+        <li><a href="#family">Family</a></li>
+        <li><a href="#friends">Friends</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <section id="about">
+        <h2>About Me</h2>
+        <p>I like building things on the web, reading up on weird history facts, and spending too much money on coffee. Currently trying to learn how to properly cook without burning down the kitchen.</p>
+      </section>
+
+      <section id="hobbies">
+        <h2>Hobbies & Interests</h2>
+        <div class="flex-grid">
+          <div class="item-card">
+            <h3>Street Photography</h3>
+            <p>I carry an old Fujifilm camera everywhere. Mostly taking bad pictures of buildings and cool cars.</p>
+          </div>
+          <div class="item-card">
+            <h3>Sci-Fi Books</h3>
+            <p>Big fan of anything dealing with space or weird dystopian futures. Currently rereading Dune.</p>
+          </div>
+          <div class="item-card">
+            <h3>Side Projects</h3>
+            <p>Messing around with CSS frameworks, building basic web apps, and trying to break things until they work.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="food">
+        <h2>Favorite Food</h2>
+        <div class="flex-grid">
+          <div class="item-card">
+            <h3>Spicy Ramen</h3>
+            <p>Specifically Tonkotsu with extra chili oil. The spicier, the better.</p>
+          </div>
+          <div class="item-card">
+            <h3>Homemade Pizza</h3>
+            <p>Bought a pizza stone last year and now I make it every single Friday night.</p>
+          </div>
+          <div class="item-card">
+            <h3>Iced Matcha</h3>
+            <p>My go-to morning caffeine fix. Usually paired with a chocolate croissant if I'm treating myself.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="family">
+        <h2>Family</h2>
+        <div class="flex-grid">
+          <div class="item-card">
+            <h3>The Parents</h3>
+            <p>Always supportive, even when I'm explaining technical stuff they don't care about.</p>
+          </div>
+          <div class="item-card">
+            <h3>My Sister</h3>
+            <p>Lives a few cities over. We mostly just text each other stupid TikToks and dog memes.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="friends">
+        <h2>Friends</h2>
+        <div class="flex-grid">
+          <div class="item-card">
+            <h3>Marcus</h3>
+            <p>Known each other since high school. Usually the guy I bounce coding ideas off of.</p>
+          </div>
+          <div class="item-card">
+            <h3>Sarah</h3>
+            <p>Our resident concert buddy. Always dragging the group to live music shows on weekends.</p>
+          </div>
+          <div class="item-card">
+            <h3>Dave</h3>
+            <p>Absolute gaming partner. We spend way too many weeknights playing multiplayer games.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 Chris. Made by hand.</p>
+    </footer>
+
+  </div>
 
 </body>
 </html>

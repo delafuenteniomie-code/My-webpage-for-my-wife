@@ -1,2 +1,208 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome To My Website!!!</title>
+  <style>
+    /* Student style reset and colors */
+    body {
+      font-family: "Comic Sans MS", "Arial", sans-serif;
+      background-color: #ffebcd; /* Blanched Almond */
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Big Bright Header */
+    header {
+      background-color: #ff007f; /* Bright Pink */
+      color: yellow;
+      text-align: center;
+      padding: 20px;
+      border-bottom: 5px solid blue;
+    }
+
+    header h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px #000;
+    }
+
+    /* Navigation Bar */
+    nav {
+      background-color: #00d2ff; /* Bright Cyan */
+      padding: 12px;
+      text-align: center;
+      border-bottom: 3px solid black;
+    }
+
+    nav a {
+      color: black;
+      background-color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 18px;
+      padding: 8px 15px;
+      margin: 0 5px;
+      border: 2px solid black;
+      border-radius: 10px;
+    }
+
+    nav a:hover {
+      background-color: yellow;
+      color: red;
+    }
+
+    /* Page Content Container */
+    .container {
+      width: 85%;
+      margin: 20px auto;
+    }
+
+    /* Boxes / Sections */
+    section {
+      background-color: white;
+      border: 4px dashed #333;
+      padding: 20px;
+      margin-bottom: 25px;
+      border-radius: 15px;
+    }
+
+    #about {
+      background-color: #e6ffff;
+      border-color: #0000ff;
+    }
+
+    #family {
+      background-color: #fff0f5;
+      border-color: #ff1493;
+    }
+
+    #friends {
+      background-color: #f0fff0;
+      border-color: #008000;
+    }
+
+    h2 {
+      font-size: 26px;
+      margin-top: 0;
+      text-decoration: underline;
+    }
+
+    #about h2 { color: blue; }
+    #family h2 { color: #ff1493; }
+    #friends h2 { color: green; }
+
+    /* Cards area */
+    .card-box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .card {
+      background-color: #ffffcc;
+      border: 2px solid orange;
+      padding: 15px;
+      width: 200px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      color: #cc0000;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #333;
+      color: lime;
+      text-align: center;
+      padding: 15px;
+      font-size: 16px;
+      border-top: 4px solid yellow;
+    }
+
+    /* Smooth Scrolling for nav links */
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>✨ Welcome To My Profile Website ✨</h1>
+    <p>Made by me for my computer project!</p>
+  </header>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#about">About Me</a>
+    <a href="#family">My Family</a>
+    <a href="#friends">My Friends</a>
+  </nav>
+
+  <div class="container">
+
+    <!-- About Me Section -->
+    <section id="about">
+      <h2>About Me 😄</h2>
+      <p>Hi guys! Welcome to my website. I made this using HTML and CSS. I like playing video games, listening to music, and hanging out with my friends after school!</p>
+    </section>
+
+    <!-- Family Section -->
+    <section id="family">
+      <h2>My Family 👨‍👩‍👧‍👦</h2>
+      <p>Here are the people in my family who help me out all the time:</p>
+      
+      <div class="card-box">
+        <div class="card">
+          <h3>Mom 👩</h3>
+          <p>She cooks great food and gives the best hugs!</p>
+        </div>
+        <div class="card">
+          <h3>Dad 👨</h3>
+          <p>He helps me fix my stuff and tells funny jokes.</p>
+        </div>
+        <div class="card">
+          <h3>My Brother 👦</h3>
+          <p>He plays games with me, but sometimes annoys me.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Friends Section -->
+    <section id="friends">
+      <h2>My Best Friends 🤙</h2>
+      <p>My awesome friends from school and the neighborhood:</p>
+      
+      <div class="card-box">
+        <div class="card">
+          <h3>Mark 🎮</h3>
+          <p>My classmate who is really good at games.</p>
+        </div>
+        <div class="card">
+          <h3>Sarah 🎨</h3>
+          <p>She is super creative and loves to draw.</p>
+        </div>
+        <div class="card">
+          <h3>Leo ⚽</h3>
+          <p>We play sports together on the weekends.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>Thanks for visiting! © 2026 | Created in Web Class</p>
+  </footer>
+
+</body>
 </html>
+>

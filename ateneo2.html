@@ -1,132 +1,334 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ateneo de Manila University</title>
+  <title>My Profile</title>
+  <!-- Google Fonts for Clean Typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* Global Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
-      font-family: 'Georgia', serif;
-      color: white;
-    }
-
-    /* 1. BLUE HEADER */
-    .header {
-      background-color: #002C76; /* Ateneo blue */
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .menu-icon {
-      width: 30px;
-      cursor: pointer;
-    }
-    .menu-icon div {
-      width: 100%;
-      height: 3px;
-      background-color: white;
-      margin: 6px 0;
-    }
-
-    .header-center {
-      text-align: center;
-      flex: 1;
-    }
-    .header-center img {
-      width: 70px;
-      height: 70px;
-    }
-    .header-center h1 {
-      font-size: 18px;
-      font-weight: normal;
-      letter-spacing: 1px;
-      margin-top: 5px;
-      text-transform: uppercase;
-    }
-
-    .search-icon {
-      font-size: 22px;
-      cursor: pointer;
-    }
-
-    /* 2. HERO SECTION WITH IMAGE + TEXT OVERLAY */
-    .hero {
-      height: 90vh; /* full screen height */
-      background-image: 
-        linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5)),
-        url('campus.jpg'); /* put your campus photo here */
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 20px;
-    }
-
-    .hero h2 {
-      font-size: 16px;
-      font-weight: normal;
-      letter-spacing: 2px;
-      margin-bottom: 10px;
-    }
-
-    .hero h3 {
-      font-size: 42px;
-      font-weight: normal;
-      line-height: 1.2;
-      margin-bottom: 20px;
-    }
-
-    .hero p {
-      font-size: 16px;
-      font-family: Verdana, sans-serif;
+      font-family: 'Inter', sans-serif;
+      background-color: #fcfcfc;
+      color: #1a1a1a;
       line-height: 1.6;
-      max-width: 320px;
     }
 
-    /* Mobile tweak */
-    @media (max-width: 600px) {
-      .header-center h1 { font-size: 14px; }
-      .hero h3 { font-size: 32px; }
+    /* Minimalist Header */
+    header {
+      background-color: #ffffff;
+      border-bottom: 1px solid #e5e5e5;
+      padding: 4rem 1rem 3rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: #111111;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 1rem;
+      color: #666666;
+      font-weight: 400;
+    }
+
+    /* Sticky Navigation */
+    nav {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      padding: 0.8rem 0;
+    }
+
+    nav ul li {
+      margin: 0 1rem;
+      position: relative; /* Needed for dropdown positioning */
+    }
+
+    nav ul li a, nav ul li button {
+      text-decoration: none;
+      color: #666666;
+      font-weight: 500;
+      font-size: 0.9rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    nav ul li a:hover, nav ul li button:hover {
+      color: #111111;
+      background-color: #f0f0f0;
+    }
+
+    /* Dropdown Styling */
+    .dropdown {
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #ffffff;
+      min-width: 160px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      padding: 0.4rem 0;
+      z-index: 1001;
+      margin-top: 0.4rem;
+    }
+
+    .dropdown-content a {
+      color: #555555;
+      padding: 0.5rem 1rem;
+      display: block;
+      text-align: left;
+      border-radius: 0;
+      font-size: 0.85rem;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f5f5f5;
+      color: #111111;
+    }
+
+    /* Show dropdown on hover */
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Main Content Container */
+    .container {
+      max-width: 800px;
+      margin: 2.5rem auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Section Styling */
+    section {
+      background: #ffffff;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border-radius: 12px;
+      border: 1px solid #e5e5e5;
+      scroll-margin-top: 5rem;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #111111;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.3px;
+    }
+
+    .section-desc {
+      color: #555555;
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Card Layout */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .card {
+      background: #fafafa;
+      border: 1px solid #eaeaea;
+      padding: 1.25rem;
+      border-radius: 8px;
+      transition: border-color 0.2s ease;
+    }
+
+    .card:hover {
+      border-color: #cccccc;
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #222222;
+      margin-bottom: 0.4rem;
+    }
+
+    .card p {
+      font-size: 0.875rem;
+      color: #666666;
+    }
+
+    /* Simple Footer */
+    footer {
+      border-top: 1px solid #e5e5e5;
+      background: #ffffff;
+      color: #888888;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.85rem;
+      margin-top: 4rem;
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="menu-icon">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-
-    <div class="header-center">
-      <img src="/img.html/car1.png" alt="Ateneo Seal">
-      <h1>Ateneo de Manila<br>University</h1>
-    
-
-    <div class="search-icon">🔍</div>
+  <!-- Header -->
+  <header>
+    <h1>Personal Profile</h1>
+    <p>A quiet corner detailing my life, interests, family, and close friends.</p>
   </header>
 
-  <!-- HERO --><div></div>
-  <section class="hero">
-    <h2>A UNIVERSITY FOR THE 21ST</h2>
-    <h2>CENTURY</h2>
-    <h3>Lux in<br>Domino</h3>
-    <p>
-      Ateneo de Manila University will be a 
-      force for good in seeking innovative 
-      solutions to...
-    </p>
-  </section>
+  <!-- Navigation -->
+  <nav>
+    <ul>
+      <li><a href="#about">About</a></li>
+      
+      <!-- Hobbies & Interests Dropdown -->
+      <li class="dropdown">
+        <button class="dropbtn">Interests ▾</button>
+        <div class="dropdown-content">
+          <a href="#hobbies">Hobbies</a>
+          <a href="#food">Favorite Food</a>
+        </div>
+      </li>
+
+      <li><a href="#family">Family</a></li>
+      <li><a href="#friends">Friends</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+
+    <!-- About Section -->
+    <section id="about">
+      <h2 class="section-title">About Me</h2>
+      <p class="section-desc">
+        Welcome to my profile. I am dedicated to continuous learning, thoughtful work, and building strong relationships with those around me.
+      </p>
+    </section>
+
+    <!-- Hobbies Section -->
+    <section id="hobbies">
+      <h2 class="section-title">Hobbies & Interests</h2>
+      <p class="section-desc">Activities that keep me creative, active, and inspired during my free time.</p>
+      
+      <div class="card-grid">
+        <div class="card">
+          <h3>Photography</h3>
+          <p>Capturing quiet moments, landscape scenery, and urban environments.</p>
+        </div>
+        <div class="card">
+          <h3>Reading</h3>
+          <p>Exploring books on technology, design, psychology, and fiction.</p>
+        </div>
+        <div class="card">
+          <h3>Coding & Tech</h3>
+          <p>Building small web applications, experimenting with code, and learning tools.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Favorite Food Section -->
+    <section id="food">
+      <h2 class="section-title">Favorite Food</h2>
+      <p class="section-desc">Dishes and comfort foods that I enjoy eating and cooking.</p>
+      
+      <div class="card-grid">
+        <div class="card">
+          <h3>Fresh Pasta</h3>
+          <p>Handmade pasta dishes, particularly creamy carbonara and fresh tomato basil.</p>
+        </div>
+        <div class="card">
+          <h3>Ramen</h3>
+          <p>Rich, warm broths with savory noodles, soft-boiled eggs, and fresh toppings.</p>
+        </div>
+        <div class="card">
+          <h3>Matcha & Pastries</h3>
+          <p>A calm morning cup of iced matcha paired with a fresh croissant or tart.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Family Section -->
+    <section id="family">
+      <h2 class="section-title">Family</h2>
+      <p class="section-desc">The foundational support system in my life.</p>
+      
+      <div class="card-grid">
+        <div class="card">
+          <h3>Mom</h3>
+          <p>Always providing wisdom, patience, and unwavering encouragement.</p>
+        </div>
+        <div class="card">
+          <h3>Dad</h3>
+          <p>A steady guide who teaches practical skills and practical thinking.</p>
+        </div>
+        <div class="card">
+          <h3>Siblings</h3>
+          <p>Lifelong companions sharing memories and growth along the way.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Friends Section -->
+    <section id="friends">
+      <h2 class="section-title">Friends</h2>
+      <p class="section-desc">People who bring perspective, humor, and shared experiences.</p>
+      
+      <div class="card-grid">
+        <div class="card">
+          <h3>Alex</h3>
+          <p>A trusted friend always ready for spontaneous ideas and discussions.</p>
+        </div>
+        <div class="card">
+          <h3>Sam</h3>
+          <p>Brings creativity, humor, and balance to everyday conversations.</p>
+        </div>
+        <div class="card">
+          <h3>Jordan</h3>
+          <p>A reliable voice and great listener through every milestone.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Personal Profile. Built simply with HTML & CSS.</p>
+  </footer>
 
 </body>
-</html>>
+</html>

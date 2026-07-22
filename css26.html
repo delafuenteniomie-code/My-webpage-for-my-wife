@@ -1,20 +1,200 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-<style>
-p {
-  border-top-style: dotted;
-  border-right-style: solid;
-  border-bottom-style: dotted;
-  border-left-style: solid;
-}
-</style>
+  <title>My Personal Website</title>
+  <style>
+    /* Styling the whole page */
+    body {
+      background-color: lightblue;
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Container to center everything */
+    .container {
+      width: 80%;
+      margin: auto;
+      background-color: white;
+      padding: 20px;
+    }
+
+    /* Header section */
+    header {
+      text-align: center;
+      background-color: darkblue;
+      color: white;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    /* Navigation bar */
+    nav {
+      background-color: #333;
+      padding: 10px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      background-color: gray;
+    }
+
+    /* Section styling */
+    section {
+      margin-bottom: 30px;
+      padding: 15px;
+      border: 1px solid #ccc;
+    }
+
+    h2 {
+      color: darkblue;
+      border-bottom: 2px solid darkblue;
+      padding-bottom: 5px;
+    }
+
+    /* Simple lists for friends and family */
+    ul {
+      margin-left: 20px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    /* Birthday Table styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    /* Footer styling */
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 12px;
+      color: #666;
+    }
+  </style>
 </head>
 <body>
-  <!--Tab to edit-->
-<h2>Individual Border Sides</h2>
-<p>2 different border styles</p>
+
+  <div class="container">
+
+    <header>
+      <h1>Welcome to My Website!</h1>
+      <p>This is a page about my life, my interests, and my friends.</p>
+    </header>
+
+    <nav>
+      <a href="#about">About Me</a>
+      <a href="#hobbies">Hobbies</a>
+      <a href="#food">Favorite Food</a>
+      <a href="#family">Family</a>
+      <a href="#friends">Friends</a>
+      <a href="#birthdays">Birthdays</a>
+    </nav>
+
+    <section id="about">
+      <h2>About Me</h2>
+      <p>Hi, my name is Chris. I am a student and I am making this website for fun. I like to hang out with friends, play video games, and learn how to build websites using HTML and CSS.</p>
+    </section>
+
+    <section id="hobbies">
+      <h2>Hobbies & Interests</h2>
+      <ul>
+        <li><strong>Photography:</strong> Taking cool pictures on my phone or camera when I go outside.</li>
+        <li><strong>Reading:</strong> I like reading fiction and sci-fi books in my free time.</li>
+        <li><strong>Coding:</strong> Trying to learn how to make basic web pages like this one.</li>
+      </ul>
+    </section>
+
+    <section id="food">
+      <h2>Favorite Food</h2>
+      <ul>
+        <li>Spicy Ramen (especially with a lot of chili oil)</li>
+        <li>Homemade Pizza on Friday nights</li>
+        <li>Iced Matcha tea from the cafe down the street</li>
+      </ul>
+    </section>
+
+    <section id="family">
+      <h2>My Family</h2>
+      <ul>
+        <li><strong>Mom:</strong> She helps me out a lot and makes great food.</li>
+        <li><strong>Dad:</strong> He is very smart and teaches me practical skills.</li>
+        <li><strong>Sister:</strong> She goes to college but texts me funny videos every day.</li>
+      </ul>
+    </section>
+
+    <section id="friends">
+      <h2>My Friends</h2>
+      <ul>
+        <li><strong>Marcus:</strong> My best friend from school. We talk about computer stuff.</li>
+        <li><strong>Sarah:</strong> She loves music and always knows about cool local concerts.</li>
+        <li><strong>Dave:</strong> We play a lot of multiplayer games together online after class.</li>
+      </ul>
+    </section>
+
+    <section id="birthdays">
+      <h2>Family and Friends Birthdays</h2>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Relationship</th>
+          <th>Birthday Date</th>
+        </tr>
+        <tr>
+          <td>Mom</td>
+          <td>Family</td>
+          <td>March 14th</td>
+        </tr>
+        <tr>
+          <td>Marcus</td>
+          <td>Friend</td>
+          <td>May 22nd</td>
+        </tr>
+        <tr>
+          <td>Sister</td>
+          <td>Family</td>
+          <td>August 5th</td>
+        </tr>
+        <tr>
+          <td>Sarah</td>
+          <td>Friend</td>
+          <td>October 12th</td>
+        </tr>
+        <tr>
+          <td>Dave</td>
+          <td>Friend</td>
+          <td>December 30th</td>
+        </tr>
+      </table>
+    </section>
+
+    <footer>
+      <p>Created by Chris - Web Design Class 2026</p>
+    </footer>
+
+  </div>
 
 </body>
 </html>
