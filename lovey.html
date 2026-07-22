@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Essential viewport meta tag for mobile responsiveness -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>A Special Kitty Surprise! 🎀</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #ffe6f0;
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 16px; /* Added padding so content never touches mobile screen edges */
+            overflow-x: hidden;
+            text-align: center;
+            color: #d63384;
+        }
+
+        /* Floating background hearts */
+        .heart-bg {
+            position: fixed;
+            top: -10%;
+            font-size: 20px;
+            color: #ffb3c6;
+            animation: floatDown 6s linear infinite;
+            z-index: 0;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        @keyframes floatDown {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 24px 18px; /* Optimized padding for mobile screens */
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(214, 51, 132, 0.2);
+            border: 3px solid #ff99c8;
+            
+            /* Mobile width adjustments */
+            width: 100%;
+            max-width: 380px; /* Perfect mobile width breakpoint */
+            
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 1.6rem; /* Scaled down slightly for smaller screens */
+            color: #ff4d8d;
+            margin-bottom: 8px;
+            text-shadow: 1px 1px 2px #ffc2d1;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #6c5ce7;
+            margin-bottom: 18px;
+            line-height: 1.4;
+        }
+
+        .kitty-bow {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+            animation: pulse 1.5s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.12); }
+        }
+
+        /* Surprise Box Button */
+        .gift-btn {
+            background-color: #ff4d8d;
+            color: white;
+            border: 3px solid #fff;
+            padding: 12px 24px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(255, 77, 141, 0.4);
+            transition: all 0.2s ease;
+            outline: none;
+            width: 100%; /* Full width button on mobile for easy tapping */
+            max-width: 280px;
+            margin: 0 auto;
+        }
+
+        .gift-btn:active {
+            transform: scale(0.96); /* Touch feedback for mobile */
+            background-color: #ff1a6c;
+        }
+
+        /* Hidden Surprise Content */
+        .surprise-content {
+            display: none;
+            margin-top: 20px;
+            animation: fadeIn 0.8s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .kitty-img {
+            width: 140px; /* Sized down to fit mobile frames comfortably */
+            max-width: 60%;
+            height: auto;
+            margin: 10px auto 15px auto;
+            filter: drop-shadow(0 4px 4px rgba(0,0,0,0.1));
+            display: block;
+        }
+
+        .love-message {
+            background: #fff0f5;
+            border: 2px dashed #ff85a2;
+            padding: 16px 12px;
+            border-radius: 12px;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #d63384;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="kitty-bow">🎀</div>
+        <h1>Hello Beautiful!</h1>
+        <p>I have a special Hello Kitty surprise just for you...</p>
+
+        <button class="gift-btn" onclick="openSurprise(this)">Click to Open Your Gift! 🎁</button>
+
+        <div class="surprise-content" id="surprise">
+            <!-- Cute Hello Kitty Image -->
+            <img class="kitty-img" src="/Music/love-you-more-love-you.gif" alt="Hello Kitty">
+            
+            <div class="love-message">
+                <p><strong>To My Wonderful Wife,</strong></p>
+                <p>You are the Hello Kitty to my Dear Daniel! 🐱❤️Just like Hello Kitty says, "You can never have too many friends," but I only need one best friend and soulmate—and that is you. You add so much color, sweetness, and happiness to my world every single day.✨</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openSurprise(buttonElement) {
+            const surpriseDiv = document.getElementById('surprise');
+            surpriseDiv.style.display = 'block';
+            buttonElement.style.display = 'none';
+        }
+
+        // Generate floating background hearts
+        function createHearts() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-bg');
+            const icons = ['🎀', '🌸', '💖', '✨'];
+            heart.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+            
+            heart.style.left = Math.random() * 90 + 'vw'; /* Prevent horizontal scroll trigger */
+            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+            heart.style.fontSize = Math.random() * 10 + 16 + 'px';
+            
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        setInterval(createHearts, 500);
+    </script>
+</body>
+</html>

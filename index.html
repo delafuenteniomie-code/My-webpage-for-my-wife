@@ -135,6 +135,38 @@
             background-color: #6c5ce7;
         }
 
+        /* Hello Kitty Styled Button CSS */
+        .hello-kitty-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 30px;
+            font-size: 1.05rem;
+            font-weight: bold;
+            color: #4A4A4A;
+            background-color: #FFC0CB; /* Pastel Pink */
+            border: 3px solid #FFFFFF;   /* Crisp white border */
+            border-radius: 30px;        /* Round pill shape */
+            box-shadow: 0px 4px 12px rgba(255, 105, 180, 0.35);
+            text-decoration: none;
+            margin-top: 15px;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+
+        .hello-kitty-btn:hover {
+            background-color: #FFB6C1;
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0px 6px 16px rgba(255, 105, 180, 0.5);
+            color: #000000;
+        }
+
+        .hello-kitty-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0px 2px 5px rgba(255, 105, 180, 0.3);
+        }
+
         #message-display {
             margin-top: 20px;
             font-style: italic;
@@ -220,6 +252,15 @@
                 </div>
 
             </div>
+        </div>
+
+        <!-- Hello Kitty Hyperlink Section -->
+        <div class="card">
+            <h2>Special Place 🎀</h2>
+            <p style="color: #636e72; font-size: 0.95rem;">Click the button below to visit our other page!</p>
+            <a href="http://localhost:7700/lovey.html" class="hello-kitty-btn" target="_blank" rel="noopener noreferrer">
+                🎀 Visit Our Special Site 🎀
+            </a>
         </div>
 
     </div>
