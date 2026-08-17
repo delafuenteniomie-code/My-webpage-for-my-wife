@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Santiago City National High School</title>
+  <style>
+    /* 1. RESET & BASE STYLES */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #f8fafc;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* 2. LAYOUT & CONTAINERS */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+
+    .bg-light {
+      background: #e2e8f0;
+    }
+
+    .title {
+      color: #002266;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: #666;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      text-align: left;
+    }
+
+    /* 3. NAVIGATION BAR */
+    .topbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      background: #002266;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      color: #ffffff;
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 1.4rem;
+    }
+
+    /* Dropdown Navigation */
+    .dropdown {
+      position: relative;
+    }
+
+    input[type="checkbox"] {
+      display: none;
+    }
+
+    .menu-btn {
+      border: 1px solid #ffffff;
+      padding: 6px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      user-select: none;
+    }
+
+    .menu-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #ffffff;
+      min-width: 240px;
+      max-height: 400px;
+      overflow-y: auto;
+      border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      margin-top: 8px;
+    }
+
+    .dropdown-content a {
+      color: #002266;
+      padding: 12px 16px;
+      display: block;
+      text-decoration: none;
+      border-bottom: 1px solid #eeeeee;
+      font-size: 0.95rem;
+    }
+
+    .dropdown-content a:hover, 
+    .highlight {
+      background: #ffd700;
+      color: #000000;
+      font-weight: bold;
+    }
+
+    /* Submenu Accordion */
+    .submenu-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .submenu-toggle-btn {
+      color: #002266;
+      padding: 12px 16px;
+      cursor: pointer;
+      font-size: 0.75rem;
+    }
+
+    .submenu-content {
+      display: none;
+      background: #f1f5f9;
+    }
+
+    .submenu-content a {
+      padding-left: 28px;
+      font-size: 0.88rem;
+      color: #444444;
+    }
+
+    /* Pure CSS Menu Toggles */
+    #menu-toggle:checked ~ .dropdown-content,
+    #gallery-sub-toggle:checked ~ .submenu-content {
+      display: block;
+    }
+
+    /* 4. HERO HEADER */
+    .header {
+      height: 400px;
+      background: linear-gradient(rgba(0, 34, 102, 0.7), rgba(0, 34, 102, 0.7)), 
+                  url('/pics/Screenshot_20260811-110723.jpg') center/cover;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding-top: 50px;
+    }
+
+    /* 5. CARDS & MEDIA */
+    .card {
+      background: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-body {
+      padding: 1.2rem;
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    /* Adjusted Video Container for Smaller Display */
+    .video-card {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .video-card video {
+      width: 100%;
+      max-height: 280px;
+      background: #000;
+      object-fit: contain;
+    }
+
+    /* 6. ENHANCED FOOTER */
+    footer {
+      background: #002266;
+      color: #ffffff;
+      padding: 2.5rem 1.5rem 1.5rem;
+    }
+
+    .footer-grid {
+      max-width: 1100px;
+      margin: 0 auto 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    .footer-col h4 {
+      color: #ffd700;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 0.3rem;
+      opacity: 0.9;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      padding-top: 1rem;
+      text-align: center;
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body id="home">
+
+  <!-- Fixed Top Navigation -->
+  <div class="topbar">
+    <div class="dropdown">
+      <input type="checkbox" id="menu-toggle">
+      <label for="menu-toggle" class="menu-btn">☰ Menu</label>
+      
+      <div class="dropdown-content">
+        <a href="secweb.html" class="highlight">📖 School Info Page</a>
+        <a href="#home">Home</a>
+        <a href="#about">About SCNHS</a>
+        <a href="#news">News</a>
+        <a href="#videos">Videos</a>
+        <a href="tc.html">School Heads</a>
+        
+        <!-- School Gallery Submenu -->
+        <div class="submenu-container">
+          <input type="checkbox" id="gallery-sub-toggle">
+          
+          <div class="submenu-header">
+            <a href="gallery.html">School Gallery</a>
+            <label for="gallery-sub-toggle" class="submenu-toggle-btn">▼</label>
+          </div>
+          
+          <div class="submenu-content">
+            <a href="#principal">↳ Principal's Message</a>
+            <a href="#mission">↳ Mission & Vision</a>
+            <a href="#history">↳ School History</a>
+            <a href="#campus-map">↳ Campus Map</a>
+            <a href="#handbook">↳ Student Handbook</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="logo">SCNHS</div>
+  </div>
+
+  <!-- Hero Header -->
+  <div class="header">
+    <h1>Santiago City National High School</h1>
+    <p>The premier school in the city</p>
+  </div>
+
+  <!-- About Section -->
+  <div class="container" id="about">
+    <h2 class="title">About SCNHS</h2>
+    <p class="subtitle">Santiago City National High School is committed to excellence, nurturing values-driven and globally competitive learners.</p>
+  </div>
+
+  <!-- News Section -->
+  <div class="container" id="news">
+    <h2 class="title">Latest News</h2>
+    <div class="grid">
+      <div class="card">
+        <img src="/pics/1785981508730.jpg" alt="Eye Checkup Event">
+        <div class="card-body">
+          <h3>Free Eye Checkup</h3>
+          <p>Nag-organisa ng libreng konsultasyon sa mata at libreng salamin ang mga doktor mula sa IPAO Isabela Chapter para sa mga piling mag-aaral ng Grade 7 ngayong araw.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="/pics/1785981689373.jpg" alt="Campus Improvements">
+        <div class="card-body">
+          <h3>Campus Improvements</h3>
+          <p>New modern facilities and learning spaces opened for SCNHSians.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Video Section -->
+  <div class="bg-light">
+    <div class="container" id="videos">
+      <h2 class="title">Video Highlights</h2>
+      <div class="card video-card">
+        <video src="/pics/AQMG-eomBQbj_XGOmgJvzg0NEzVLEVr_joWyQGLAXVXwtuLN13lvtNyCI3iWYOCyGFJUApKc5mE8XbvsyBvvjhBqlSnFz4TwEDRgAA-kxg.mp4" controls></video>
+        <div class="card-body">
+          <h3>National Disaster Resilience Celebration</h3>
+          <p>Promoting disaster awareness, preparedness, and resilience to build a safer community through Videokasiya.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <!-- Contact Column -->
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <p>Santiago City, Isabela, PH</p>
+        <p>Email: info@scnhs.edu</p>
+        <p>Phone: +63 (2) 8426-6001</p>
+      </div>
+
+      <!-- Web Developers Column -->
+      <div class="footer-col">
+        <h4>Web Development Team</h4>
+        <ul>
+          <li>Member 1 (Lead Developer)</li>
+          <li>Member 2 (UI/UX Designer)</li>
+          <li>Member 3 (Frontend Developer)</li>
+          <li>Member 4 (Content Editor)</li>
+          <li>Member 5 (QA Tester)</li>
+        </ul>
+        <h4>Contacts Us</h4>
+        <ul>
+          <li>@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="footer-bottom">
+      <p>© 2026 Santiago City National High School. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
