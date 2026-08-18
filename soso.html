@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santiago City National High School</title>
+    <style>
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+  font-family: 'Segoe UI', Arial, sans-serif; 
+} 
+
+html { 
+  scroll-behavior: smooth; 
+}
+
+body { 
+  background: #f4f6f8; 
+  color: #333; 
+  line-height: 1.5; 
+} 
+
+header { 
+  background: #002b49; 
+  color: white; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 15px 40px; 
+} 
+
+.school-logo { 
+  width: 80px; 
+  height: 80px; 
+  border-radius: 50%; 
+} 
+
+.school-name { 
+  font-size: 22px; 
+  font-weight: bold; 
+} 
+
+.navbar { 
+  background: #1b4f72; 
+} 
+
+nav ul { 
+  display: flex; 
+  justify-content: center; 
+  gap: 10px; 
+  list-style: none; 
+} 
+
+nav li { 
+  position: relative; 
+} 
+
+nav a { 
+  color: white; 
+  text-decoration: none; 
+  padding: 15px 20px; 
+  display: block; 
+  font-weight: 500; 
+} 
+
+nav a:hover { 
+  color: #ffcc00; 
+} 
+
+nav li ul { 
+  display: none; 
+  position: absolute; 
+  top: 100%; 
+  left: 0; 
+  background: #002b49; 
+  min-width: 180px; 
+  list-style: none;
+} 
+
+nav li:hover ul { 
+  display: block; 
+} 
+
+.content-area { 
+  max-width: 1200px; 
+  margin: 50px auto; 
+  padding: 0 20px; 
+} 
+
+.section { 
+  max-width: 1000px; 
+  margin: auto; 
+  padding: 40px 20px; 
+} 
+
+.section h2, .section-title { 
+  text-align: center; 
+  color: #1b4f72; 
+  font-size: 2rem; 
+  margin-bottom: 20px; 
+} 
+
+.about-box { 
+  background: white; 
+  padding: 25px; 
+  border-radius: 12px; 
+} 
+
+.departments-grid, .announcements-wrapper, .org-horizontal-wrapper { 
+  display: grid; 
+  gap: 20px; 
+} 
+
+.departments-grid { 
+  grid-template-columns: repeat(3, 1fr); 
+} 
+
+.announcements-wrapper, .org-horizontal-wrapper { 
+  grid-template-columns: repeat(2, 1fr); 
+} 
+
+.dept-card, .card, .org-horizontal-card { 
+  background: white; 
+  border-radius: 8px; 
+  overflow: hidden; 
+  border: 1px solid #ddd; 
+  padding: 15px; 
+} 
+
+.org-horizontal-card { 
+  display: flex; 
+  gap: 15px; 
+} 
+
+.dept-image, .card-image img, .org-horizontal-img img { 
+  width: 100%; 
+  height: 120px; 
+  object-fit: cover; 
+} 
+
+.org-horizontal-img { 
+  width: 120px; 
+} 
+
+footer { 
+  background: #002b49; 
+  color: white; 
+  text-align: center; 
+  padding: 30px 20px; 
+  margin-top: 40px; 
+} 
+
+footer a { 
+  color: #5dade2; 
+  margin: 0 10px; 
+} 
+
+@media (max-width: 768px) { 
+  .departments-grid, .announcements-wrapper, .org-horizontal-wrapper { 
+    grid-template-columns: 1fr; 
+  } 
+  nav ul { 
+    flex-direction: column; 
+  } 
+}
+    </style>
+</head>
+<body>
+
+<header id="home">
+    <img src="pic.jpg" alt="Logo" class="school-logo">
+    <div class="school-name">Santiago City National High School</div>
+    <nav class="navbar">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li>
+                <a href="#history">About</a>
+                <ul>
+                    <li><a href="#history">History</a></li>
+                    <li><a href="#profile">Profile</a></li>
+                </ul>
+            </li>
+            <li><a href="#organization">Organization</a></li>
+            <li>
+                <a href="#programs">Programs</a>
+                <ul>
+                    <li><a href="#ste">STE</a></li>
+                    <li><a href="#spj">SPJ</a></li>
+                    <li><a href="#spfl">SPFL</a></li>
+                    <li><a href="#spa">SPA</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#departments">Departments</a>
+                <ul>
+                    <li><a href="#JHS">JHS</a></li>
+                    <li><a href="#SHS">SHS</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</header>
+<section id="history" class="section">
+    <h2>About Santiago City National High School</h2>
+    <div class="about-box">
+        <p>Welcome to Santiago City National High School. Our institution is dedicated to providing quality education and fostering academic excellence.</p>
+    </div>
+</section>
+
+<section class="section">
+    <h2 class="section-title">Announcements</h2>
+    <div class="announcements-wrapper">
+        <div class="card">
+            <div class="card-image"><img src="pic.jpg" alt="Announcement"></div>
+            <h3>Announcement 1</h3>
+            <p>Details regarding upcoming school events.</p>
+        </div>
+        <div class="card">
+            <div class="card-image"><img src="pic.jpg" alt="Announcement"></div>
+            <h3>Announcement 2</h3>
+            <p>Important updates for students and parents.</p>
+        </div>
+    </div>
+</section>
+
+<section id="profile" class="section">
+    <h2>History</h2>
+    <div class="about-box">
+        <p>Santiago City National High School has long served the community as a premier learning institution.</p>
+    </div>
+</section>
+
+<section id="programs" class="section">
+    <h2 class="section-title">Programs</h2>
+    <div class="announcements-wrapper">
+        <div class="card" id="ste">
+            <h3>STE</h3>
+            <p>Science, Technology, and Engineering Program.</p>
+        </div>
+        <div class="card" id="spj">
+            <h3>SPJ</h3>
+            <p>Special Program in Journalism.</p>
+        </div>
+        <div class="card" id="spfl">
+            <h3>SPFL</h3>
+            <p>Special Program in Foreign Language.</p>
+        </div>
+        <div class="card" id="spa">
+            <h3>SPA</h3>
+            <p>Special Program in the Arts.</p>
+        </div>
+    </div>
+</section>
+<main id="departments" class="content-area">
+    <section class="section">
+        <h2 id="JHS" class="section-title">JHS Departments</h2>
+        <div class="departments-grid">
+            <article class="dept-card">
+                <img src="english.jpg" alt="English" class="dept-image">
+                <h3>English</h3>
+                <p>Department details.</p>
+            </article>
+            <article class="dept-card">
+                <img src="math.jpg" alt="Math" class="dept-image">
+                <h3>Mathematics</h3>
+                <p>Department details.</p>
+            </article>
+            <article class="dept-card">
+                <img src="science.jpg" alt="Science" class="dept-image">
+                <h3>Science</h3>
+                <p>Department details.</p>
+            </article>
+            <article class="dept-card">
+                <img src="filipino.jpg" alt="Filipino" class="dept-image">
+                <h3>Filipino</h3>
+                <p>Department details.</p>
+            </article>
+            <article class="dept-card">
+                <img src="ap.jpg" alt="AP" class="dept-image">
+                <h3>Araling Panlipunan</h3>
+                <p>Department details.</p>
+            </article>
+            <article class="dept-card">
+                <img src="mapeh.jpg" alt="MAPEH" class="dept-image">
+                <h3>MAPEH</h3>
+                <p>Department details.</p>
+            </article>
+            <article class="dept-card">
+                <img src="tle.jpg" alt="TLE" class="dept-image">
+                <h3>TLE</h3>
+                <p>Department details.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 id="SHS" class="section-title">SHS Departments</h2>
+        <div class="departments-grid">
+            <article class="dept-card">
+                <img src="english.jpg" alt="English" class="dept-image">
+                <h3>English</h3>
+                <p>Senior High details.</p>
+            </article>
+            <article class="dept-card">
+                <img src="math.jpg" alt="Math" class="dept-image">
+                <h3>Mathematics</h3>
+                <p>Senior High details.</p>
+            </article>
+        </div>
+    </section>
+
+    <section id="organization" class="section">
+        <h2 class="section-title">Organizations</h2>
+        <div class="org-horizontal-wrapper">
+            <article class="org-horizontal-card">
+                <div class="org-horizontal-img"><img src="org1.jpg" alt="Org"></div>
+                <div>
+                    <h3>Organization 1</h3>
+                    <p>Member details.</p>
+                </div>
+            </article>
+            <article class="org-horizontal-card">
+                <div class="org-horizontal-img"><img src="org2.jpg" alt="Org"></div>
+                <div>
+                    <h3>Organization 2</h3>
+                    <p>Member details.</p>
+                </div>
+            </article>
+        </div>
+    </section>
+</main>
+
+<footer>
+  <p>&copy; Santiago City National High School. All Rights Reserved.</p>
+  <div>
+    <p><strong>School:</strong> Santiago City National High School</p>
+    <p><strong>Email:</strong> 300599@deped.gov.ph</p>
+    <p><strong>Address:</strong> Narra St., Calaocan, Santiago, Philippines, 3311</p>
+  </div>
+</footer>
+
+</body>
+</html>

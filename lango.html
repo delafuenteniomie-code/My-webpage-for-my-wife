@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SCNHS</title>
+  <style>
+    /* 1. Global Reset & Soft Gradient Background */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #eef2f3 0%, #8e9eab 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 2. Topbar */
+    .topbar {
+      background: #102a43;
+      color: white;
+      padding: 18px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .topbar b {
+      font-size: 1.4rem;
+      letter-spacing: 1px;
+    }
+
+    .topbar a {
+      color: #d9e2ec;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .topbar a:hover {
+      color: #627d98;
+    }
+
+    /* 3. Floating Content Card */
+    .content {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      max-width: 650px;
+      margin: 80px auto;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+      text-align: center;
+      flex: 1;
+    }
+
+    .content h1 {
+      color: #102a43;
+      font-size: 2.2rem;
+      margin-bottom: 15px;
+    }
+
+    .content p {
+      color: #486581;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    /* 4. Footer */
+    .footer {
+      background: #0f172a;
+      color: #9fb3c8;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <b>SCNHS</b>
+    <div>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+
+  <!-- Main Body Content -->
+  <div class="content">
+    <h1>Welcome to SCNHS</h1>
+    <p>A clean, modern, and beautiful layout designed for elegance while staying straightforward and easy to update.</p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>&copy; 2026 SCNHS. All rights reserved.</p>
+  </div>
+
+</body>
+</html>

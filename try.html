@@ -1,0 +1,53 @@
+<html>
+  <head><title>else if</title>
+  <style>
+  h1 { color: lightgreen;
+    
+  }
+  
+  body {
+    background-color: black;
+  }
+  
+  h3 {
+    color: lightgreen;
+  }
+  
+  label {
+    color: green;
+  }
+    
+    
+  </style>
+    
+    
+  </head>
+  <body>
+    <h1>BB wss Checker</h1>
+    
+    <label>Enter Grade:</label>
+    <input type="number" id="grade">
+    <br><br>
+    <button onclick="checkGrade()">Check Result</button>
+    <h3 id="result"></h3>
+    
+    <script>
+    function checkGrade() {
+      
+      let grade = Number (document.getElementById("grade").value);
+       
+      if (grade >= 75 && grade <= 100) {document.getElementById("result").innerHTML = "PASSED";
+      }
+      
+      else if (grade >= 0 && 
+      grade < 75) {document.getElementById("result").innerHTML = "FAILED";
+      }
+      
+      else {
+        document.getElementById("result").innerHTML = "INVALID GRADE";
+      }
+    }
+      </script>
+    
+  </body>
+</html>

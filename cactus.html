@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Student Online Registration</title>
+ <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+ <div class="header">
+ <h1>BASIC EDUCATION ONLINE REGISTRATION</h1>
+ <p>Please complete all required information.</p>
+ </div>
+ <form id="registrationForm">
+ <h2>1. School Information</h2>
+ <div class="form-row">
+ <div class="form-group">
+ <label>School Year</label>
+ <input type="text" id="schoolYear"
+ placeholder="2026-2027" required> </div>
+ <div class="form-group">
+ <label>Learner Reference Number (LRN)</label>
+ <input type="text" id="lrn"
+ placeholder="Enter LRN" maxlength="12">
+ </div>
+ </div>
+ <h2>2. Grade Level to Enroll</h2>
+ <div class="form-group">
+ <label>Grade Level</label>
+ <select id="gradeLevel" required>
+ <option value="">-- Select Grade Level --</option>
+ <option>Grade 7</option>
+ <option>Grade 8</option>
+ <option>Grade 9</option>
+ <option>Grade 10</option>
+ <option>Grade 11</option>
+ <option>Grade 12</option>
+ <option>Non-Graded / SNED</option>
+ </select>
+ </div>
+ <h2>3. Learner's Personal Information</h2>
+ <div class="form-row">
+ <div class="form-group">
+ <label>Last Name</label>
+ <input type="text" id="lastName" required>
+ </div>
+ <div class="form-group">
+ <label>First Name</label>
+ <input type="text" id="firstName" required>
+ </div>
+ </div>
+ <div class="form-row">
+ <div class="form-group">
+ <label>Middle Name</label>
+ <input type="text" id="middleName">
+ </div>
+ <div class="form-group">
+ <label>Birthdate</label>
+ <input type="date" id="birthdate" required>
+ </div>
+ <div class="form-group">
+ <label>Age</label>
+ <input type="number" id="age" readonly>
+ </div>
+ </div>
+ <div class="form-row">
+ <div class="form-group">
+ <label>Sex</label>
+ <select id="sex" required>
+ <option value="">-- Select Sex --</option>
+ <option>Male</option>
+<option>Female</option>
+ </select>
+ </div>
+ <div class="form-group">
+ <label>Place of Birth</label>
+ <input type="text" id="placeOfBirth">
+ </div>
+ </div>
+ <h2>Current Address</h2> <div class="form-row">
+ <div class="form-group">
+ <label>House No.</label>
+ <input type="text" id="currentHouseNo">
+ </div>
+ <div class="form-group">
+ <label>Street</label>
+ <input type="text" id="currentStreet">
+ </div>
+ <div class="form-group">
+ <label>Barangay</label>
+ <input type="text" id="currentBarangay">
+ </div>
+ </div>
+ <div class="form-row">
+ <div class="form-group">
+ <label>Municipality/City</label>
+ <input type="text" id="currentCity">
+ </div>
+ <div class="form-group">
+ <label>Province</label>
+ <input type="text" id="currentProvince">
+ </div>
+ <div class="form-group">
+ <label>Zip Code</label>
+ <input type="text" id="currentZip">
+ </div>
+ </div>
+ <h2>Permanent Address</h2>
+ <div class="checkbox-group">
+ <input type="checkbox" id="sameAddress">
+ <label for="sameAddress">Same as Current Address</label>
+ </div>
+ <div id="permanentAddress">
+ <div class="form-row">
+ <div class="form-group">
+ <label>House No.</label>
+<input type="text" id="permanentHouseNo">
+ </div>
+ <div class="form-group">
+ <label>Street</label>
+<input type="text" id="permanentStreet">
+ </div>
+ <div class="form-group">
+ <label>Barangay</label>
+<input type="text" id="permanentBarangay">
+ </div>
+ </div>
+ </div>
+ <h2>4. Parent's/Guardian's Information</h2>
+ <h3>Father's Information</h3>
+ <div class="form-row">
+ <div class="form-group">
+ <label>Last Name</label>
+ <input type="text" id="fatherLastName">
+ </div>
+ <div class="form-group">
+ <label>First Name</label>
+ <input type="text" id="fatherFirstName">
+ </div>
+ <div class="form-group">
+ <label>Contact Number</label>
+ <input type="text" id="fatherContact"> </div>
+ </div>
+ <h3>Mother's Information</h3>
+ <div class="form-row">
+ <div class="form-group">
+ <label>Last Name</label>
+ <input type="text" id="motherLastName">
+ </div>
+ <div class="form-group">
+ <label>First Name</label>
+ <input type="text" id="motherFirstName">
+ </div>
+ <div class="form-group">
+ <label>Contact Number</label>
+ <input type="text" id="motherContact">
+ </div>
+ </div>
+ <button type="submit">Submit Registration</button>
+ </form>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
